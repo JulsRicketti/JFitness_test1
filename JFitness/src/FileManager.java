@@ -34,8 +34,8 @@ public class FileManager {
 	}
 	
 	int readLines() throws IOException{
-		FileReader file_to_read = new FileReader(path);
-		BufferedReader bf = new BufferedReader(file_to_read);
+		FileReader fileToRead = new FileReader(path);
+		BufferedReader bf = new BufferedReader(fileToRead);
 		
 		String aLine;
 		int numberOfLines=0;
@@ -52,10 +52,18 @@ public class FileManager {
 	//To write on the file:
 	public void writeToFile (String textLine) throws IOException{
 		FileWriter write = new FileWriter(path, appendToFile);
-		PrintWriter print_line = new PrintWriter(write);
+		PrintWriter printLine = new PrintWriter(write);
 		
-		print_line.printf("%s" + "%n", textLine);
-		print_line.close();
+		printLine.printf("%s" + "%n", textLine);
+		printLine.close();
+	}
+	
+	public void clearFile() throws IOException{
+		FileWriter write = new FileWriter(path, false);
+		PrintWriter printLine = new PrintWriter(write);
+		
+		printLine.print("");
+		printLine.close();
 	}
 	
 
