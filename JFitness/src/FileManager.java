@@ -1,13 +1,21 @@
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.PrintWriter;
 
-public class ReadFile {
+public class FileManager {
 
 	private String path;
+	private boolean append_to_file = false;
 	
-	public ReadFile(String file_path){
-		path = file_path;
+	public FileManager(String path){
+		this.path = path;
+	}
+	
+	public FileManager(String path, boolean append_to_file){
+		this.path = path;
+		this.append_to_file = append_to_file;
 	}
 	
 	public String[] OpenFile() throws IOException{
@@ -40,5 +48,15 @@ public class ReadFile {
 		bf.close();
 		return numberOfLines;
 	}
+	
+	//To write on the file:
+	public void writeToFile (String textLine) throws IOException{
+		FileWriter write = new FileWriter(path, append_to_file);
+		PrintWriter print_line = new PrintWriter(write);
+		
+		print_line.printf("%s" + "%n", textLine);
+		print_line.close();
+	}
+	
 
 }

@@ -14,7 +14,7 @@ public class Main {
 		String file_name = ".\\src\\test"; //relative file path 
 		
 		try{
-			ReadFile file = new ReadFile(file_name);
+			FileManager file = new FileManager(file_name);
 			String[] aryLines = file.OpenFile();
 			
 			for(int i=0; i<aryLines.length; i++){
@@ -22,6 +22,15 @@ public class Main {
 			}
 		}
 		catch (IOException e){
+			System.out.println (e.getMessage());
+		}
+		
+		//testing to write a file:
+		try{
+			FileManager data = new FileManager(file_name, true);
+			data.writeToFile("Lets try this again, yes?");
+		}
+		catch(IOException e){
 			System.out.println (e.getMessage());
 		}
 	}
