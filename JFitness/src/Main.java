@@ -11,7 +11,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException {
-		String file_name = ".\\src\\test"; //relative file path 
+		String file_name = ".\\Files\\test2"; //relative file path 
 		
 		try{
 			FileManager file = new FileManager(file_name);

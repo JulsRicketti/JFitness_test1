@@ -7,20 +7,20 @@ import java.io.PrintWriter;
 public class FileManager {
 
 	private String path;
-	private boolean append_to_file = false;
+	private boolean appendToFile = false;
 	
 	public FileManager(String path){
 		this.path = path;
 	}
 	
-	public FileManager(String path, boolean append_to_file){
+	public FileManager(String path, boolean appendToFile){
 		this.path = path;
-		this.append_to_file = append_to_file;
+		this.appendToFile = appendToFile;
 	}
 	
 	public String[] OpenFile() throws IOException{
-		FileReader fr = new FileReader(path);
-		BufferedReader textReader = new BufferedReader(fr);
+		FileReader read = new FileReader(path);
+		BufferedReader textReader = new BufferedReader(read);
 		
 		int numberOfLines = this.readLines();
 		String[] textData = new String[numberOfLines];
@@ -51,7 +51,7 @@ public class FileManager {
 	
 	//To write on the file:
 	public void writeToFile (String textLine) throws IOException{
-		FileWriter write = new FileWriter(path, append_to_file);
+		FileWriter write = new FileWriter(path, appendToFile);
 		PrintWriter print_line = new PrintWriter(write);
 		
 		print_line.printf("%s" + "%n", textLine);
