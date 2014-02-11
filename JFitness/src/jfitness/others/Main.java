@@ -1,3 +1,4 @@
+package jfitness.others;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -16,6 +17,9 @@ public class Main {
 		
 		User user = new User();
 		user.updateUserFile(fileName);
+		
+		FileManager file = new FileManager(fileName);
+		System.out.println(file.isEmpty());
 		
 //		try{
 //			FileManager file = new FileManager(fileName);

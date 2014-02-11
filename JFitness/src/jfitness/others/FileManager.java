@@ -1,3 +1,5 @@
+package jfitness.others;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
@@ -64,6 +66,14 @@ public class FileManager {
 		
 		printLine.print("");
 		printLine.close();
+	}
+	
+	//check if file is empty
+	public boolean isEmpty(){
+		File file = new File(path);
+		if(file.length()==0)
+			return true;
+		return false;
 	}
 	
 
