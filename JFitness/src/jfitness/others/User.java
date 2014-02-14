@@ -6,6 +6,15 @@ import java.util.List;
 
 public class User {
 
+	
+	public class Objectives{
+		public static final String WALK = "WALK";
+		public static final String CALORIES = "CALORIES";
+		public static final String DISTANCE_RUN = "DISTANCE_RUN";
+		public static final String VELOCITY_RUN = "VELOCITY_RUN";
+		public static final String MARATHON_RUN = "MARATHON_RUN";
+	}
+	
 	private int currentWeight;
 	private int initialWeight;
 	private int age;
