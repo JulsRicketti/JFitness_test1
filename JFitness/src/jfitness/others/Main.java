@@ -17,9 +17,9 @@ public class Main {
 		
 		User user = new User();
 		user.updateUserFile(fileName);
-		
-		FileManager file = new FileManager(fileName);
-		System.out.println(file.isEmpty());
+
+		Runner runner = new Runner();
+		runner.getRecommendation();
 		
 //		try{
 //			FileManager file = new FileManager(fileName);
