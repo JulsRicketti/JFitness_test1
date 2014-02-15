@@ -41,6 +41,7 @@ public class User {
 		this.initialWeight = 63;
 		this.age = 23;
 		this.sex = Sex.FEMALE;
+		this.setWalkingSpeed();
 		objectives.add(Objectives.CALORIES);
 		objectives.add(Objectives.WALK);
 	}
@@ -107,6 +108,7 @@ public class User {
 	}
 
 	public void setWalkingSpeed() {
+		//initially everything is in cm.
 		if(sex.equals(Sex.FEMALE)){
 			if(age<=20)
 				walkingSpeed=140.7;
@@ -135,6 +137,7 @@ public class User {
 			if(age>60)
 				walkingSpeed = 133.0;
 		}
+		walkingSpeed = walkingSpeed/100; //we convert it to meters
 	}
 	
 

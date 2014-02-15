@@ -18,8 +18,12 @@ public class Main {
 		User user = new User();
 		user.updateUserFile(fileName);
 
-		Runner runner = new Runner();
-		runner.getRecommendation();
+		Walker walker = new Walker();
+		double recommendation = walker.recommend();
+		System.out.println("Please walk "+recommendation+ " meters today");
+		
+		walker.analyse(user);
+		
 		
 //		try{
 //			FileManager file = new FileManager(fileName);
