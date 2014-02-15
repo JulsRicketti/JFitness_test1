@@ -15,10 +15,18 @@ public class User {
 		public static final String MARATHON_RUN = "MARATHON_RUN";
 	}
 	
+	public class Sex{
+		public static final String FEMALE = "FEMALE";
+		public static final String MALE = "MALE";
+	}
+	
 	private int currentWeight;
 	private int initialWeight;
 	private int age;
+	private double walkingSpeed;
+	private String sex;
 	private List <String> objectives = new ArrayList<String>();
+	
 	
 	
 	public User(int currentWeight, int initialWeight, int age, List<String> objectives){
@@ -32,8 +40,9 @@ public class User {
 		this.currentWeight = 63;
 		this.initialWeight = 63;
 		this.age = 23;
-		objectives.add("Calories");
-		objectives.add("Walk");
+		this.sex = Sex.FEMALE;
+		objectives.add(Objectives.CALORIES);
+		objectives.add(Objectives.WALK);
 	}
 	
 	public void updateUserFile(String fileName){
@@ -47,6 +56,8 @@ public class User {
 			data.writeToFile(Integer.toString(currentWeight));
 			data.writeToFile(Integer.toString(initialWeight));
 			data.writeToFile(Integer.toString(age));
+			data.writeToFile(sex);
+			data.writeToFile(Double.toString(walkingSpeed));
 			
 			for(int i=0; i<objectives.size(); i++){
 				data.writeToFile(objectives.get(i));
@@ -82,6 +93,50 @@ public class User {
 	public void setobjectives(List<String> objectives) {
 		this.objectives = objectives;
 	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public double getWalkingSpeed() {
+		return walkingSpeed;
+	}
+
+	public void setWalkingSpeed() {
+		if(sex.equals(Sex.FEMALE)){
+			if(age<=20)
+				walkingSpeed=140.7;
+			if(age>20 && age<=30)
+				walkingSpeed=141.5;
+			if(age>30 && age<=40)
+				walkingSpeed=139.1;
+			if(age>40 && age<=50)
+				walkingSpeed=139.5;
+			if(age>50 && age<=60)
+				walkingSpeed=129.6;
+			if(age>60)
+				walkingSpeed = 127.2;
+		}
+		else{
+			if(age<=20)
+				walkingSpeed=139.3;
+			if(age>20 && age<=30)
+				walkingSpeed=145.8;
+			if(age>30 && age<=40)
+				walkingSpeed=146.2;
+			if(age>40 && age<=50)
+				walkingSpeed=139.3;
+			if(age>50 && age<=60)
+				walkingSpeed=135.9;
+			if(age>60)
+				walkingSpeed = 133.0;
+		}
+	}
+	
 
 	
 	
