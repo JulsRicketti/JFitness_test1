@@ -1,4 +1,4 @@
-package jfitness.others;
+package jfitness;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

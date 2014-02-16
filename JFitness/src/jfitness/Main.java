@@ -1,4 +1,4 @@
-package jfitness.others;
+package jfitness;
 import java.io.IOException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -18,11 +18,15 @@ public class Main {
 		User user = new User();
 		user.updateUserFile(fileName);
 
+		/*Issue: there is only one line that is being written both on the walk and recommend files!*/
+		//Where to start checking the error from:
+		//analyse function and calculateDistanceWalked functions!
 		Walker walker = new Walker();
 		double recommendation = walker.recommend();
 		System.out.println("Please walk "+recommendation+ " meters today");
-		
-		walker.analyse(user);
+		walker.registerWalk(user, 30);
+		recommendation = walker.recommend();
+		System.out.println("Please walk "+recommendation+ " meters today");
 		
 		
 //		try{

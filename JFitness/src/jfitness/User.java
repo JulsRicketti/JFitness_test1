@@ -1,4 +1,4 @@
-package jfitness.others;
+package jfitness;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
