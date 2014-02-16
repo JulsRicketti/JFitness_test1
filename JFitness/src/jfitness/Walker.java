@@ -2,7 +2,7 @@ package jfitness;
 
 import java.io.IOException;
 
-public class Walker {
+public class Walker implements Strategy{
 	
 	public class Evaluation{
 		public static final String VERY_GOOD = "VERY_GOOD";
@@ -15,6 +15,8 @@ public class Walker {
 	final String analyseFileName = ".\\Files\\walkerAnalyse";
 	final int DAYS_OF_WEEK = 7;
 	final int DEFAULT_MINIMUM_DISTANCE_WEEK= 5500;
+	
+	int DEFAULT_MINUMUM_DAILY_WALK_TIME = 30; //30 minutes
 	
 	//the minimum distance a week is the default! The user may be able to change it if he wants too!
 	double minimumDistanceWeek = DEFAULT_MINIMUM_DISTANCE_WEEK; //we make the distance in meters
@@ -44,7 +46,7 @@ public class Walker {
 		}
 	}
 	
-	double recommend() throws IOException{
+	public double recommend() throws IOException{
 		FileManager file = new FileManager(recommendFileName, true);
 		if(file.isEmpty()){
 			recommendation = minimumDistanceWeek/DAYS_OF_WEEK;
@@ -62,8 +64,8 @@ public class Walker {
 		//Remember:
 		//The time is in minutes
 		//The original speed is in m/s
-		//I dont think the 100 is correct...
-		return (time*60*(user.getWalkingSpeed())/100);
+		System.out.println("Distance walked: "+time*60*(user.getWalkingSpeed())+" meters");
+		return (time*60*(user.getWalkingSpeed()));
 		
 	}
 	
@@ -75,6 +77,9 @@ public class Walker {
 	
 	//the objective is to try and make people walk at the very least 5.5km every 5 days
 	//when using time as the parameter, we will take into consideration the average walking speed of a human
+	/*How it works for now:
+	 * If the user has already walked the needed distance in the passed 7 days, just divided the weekly distance by 7
+	 * Perhaps I still need to find a better way to do this.*/
 	void analyse(User user, int time) throws IOException{
 		FileManager analyseFile = new FileManager(analyseFileName, true);
 		FileManager recommendFile = new FileManager(recommendFileName, true);
@@ -100,9 +105,11 @@ public class Walker {
 				totalDistanceWalked += calculateDistanceWalked(Integer.parseInt(data[(data.length-1)-(i)]), user); //we get the last distances registered in the file
 			}
 			averageOfDistance = totalDistanceWalked/(DAYS_OF_WEEK-1);
-			distanceLeft = minimumDistanceWeek - ((DAYS_OF_WEEK-1)*averageOfDistance);
-			System.out.println("minimum distance week: "+minimumDistanceWeek);
-			System.out.println("Average of distance: "+averageOfDistance);
+			if(((DAYS_OF_WEEK-1)*averageOfDistance) > minimumDistanceWeek){
+				distanceLeft = minimumDistanceWeek/DAYS_OF_WEEK; //we restart in order to motivate the user to keep doing it
+			}
+			else
+				distanceLeft = minimumDistanceWeek - ((DAYS_OF_WEEK-1)*averageOfDistance);
 			System.out.println("distance left: "+distanceLeft);
 			recommendFile.writeToFile(Double.toString(distanceLeft));
 		}
@@ -118,6 +125,18 @@ public class Walker {
 		}
 		else
 			this.minimumDistanceWeek = minimumDistanceWeek;
+	}
+
+	@Override
+	public void analyse() throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void report() throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

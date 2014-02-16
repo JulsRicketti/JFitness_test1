@@ -24,6 +24,7 @@ public class User {
 	private int initialWeight;
 	private int age;
 	private double walkingSpeed;
+	private int calorieIntake;
 	private String sex;
 	private List <String> objectives = new ArrayList<String>();
 	
@@ -101,6 +102,18 @@ public class User {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public int getCalorieIntake() {
+		return calorieIntake;
+	}
+
+	//based on: https://www.weightlossresources.co.uk/logout/calorie_intake.htm
+	public void setCalorieIntake(int calorieIntake) {
+		if(sex.equals(Sex.MALE))
+			calorieIntake = 2550;
+		else
+			calorieIntake = 1940;
 	}
 
 	public double getWalkingSpeed() {

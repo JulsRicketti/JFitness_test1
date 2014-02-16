@@ -24,7 +24,7 @@ public class Main {
 		Walker walker = new Walker();
 		double recommendation = walker.recommend();
 		System.out.println("Please walk "+recommendation+ " meters today");
-		walker.registerWalk(user, 30);
+		walker.registerWalk(user, 1);
 		recommendation = walker.recommend();
 		System.out.println("Please walk "+recommendation+ " meters today");
 		

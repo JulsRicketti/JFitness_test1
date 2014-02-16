@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class Runner {
+public class Runner implements Strategy {
 
 	public class Evaluation{
 		public static final String VERY_EASY = "VERY_EASY";
@@ -84,6 +84,19 @@ public class Runner {
 		if(lastRun >= this.runRecommendation && lastEvaluation == Evaluation.NORMAL){
 			
 		}
+		
+	}
+
+	@Override
+	public double recommend() {
+		// TODO Auto-generated method stub
+		return 0.0; //just added until the method properly is implemented
+		
+	}
+
+	@Override
+	public void report() {
+		// TODO Auto-generated method stub
 		
 	}
 	

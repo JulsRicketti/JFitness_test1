@@ -2,11 +2,14 @@ package jfitness;
 
 import java.io.IOException;
 
-public class CalorieCounter {
+public class CalorieCounter implements Strategy {
 	
-	String fileName ="";
+	String calorieAnalyse = ".\\Files\\calorieCounterAnalyse";
+	String calorieRecommend= ".\\Files\\calorieCounterRecommend";
 	double met;
 	double calories;
+	final int DAYS_OF_WEEK = 7;
+	final int DEFAULT_MINIMUM_CALORIE_WEEK= 2800;
 	
 	int calculateAverageVelocity(int distance, int time){
 		return (distance/time);
@@ -52,19 +55,33 @@ public class CalorieCounter {
 		return 0;
 	}
 	
+	//remember: by default, the time is in minutes!
 	double calculateCalories(User user, double met, int time){
-		return (met*(user.getcurrentWeight())*time);
+		return (met*(user.getcurrentWeight())*(time/60));
 	}
 	
-	void updateCalorieFile(){
+	public double recommend(){
 		try{
-			FileManager data = new FileManager(fileName, true);
+			FileManager data = new FileManager(calorieAnalyse, true);
 			data.writeToFile(Double.toString(this.calories));
 
 		}
 		catch(IOException e){
 			System.out.println (e.getMessage());
 		}
+		return 0.0; //just added until the method is properly implemented
+	}
+
+	@Override
+	public void analyse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void report() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
