@@ -9,6 +9,7 @@ public class Walker implements Strategy{
 		public static final String GOOD = "GOOD";
 		public static final String NORMAL = "NORMAL";
 		public static final String BAD = "BAD";
+		public static final String INCONCLUSIVE = "INCONCLUSIVE";
 	}
 	
 	final String recommendFileName = ".\\Files\\walkerRecommend"; //file where all the walker recommendations will be stored
@@ -132,19 +133,45 @@ public class Walker implements Strategy{
 	}
 	
 	//when the person wants a daily mode to evaluate their walk
-	void dailyWalkerEvaluator(int time){
+	String dailyWalkerEvaluator(int time){
 		if (time<badInterval){
-			result = Evaluation.BAD;
+			return Evaluation.BAD;
 		}
 		if(time>normalInterval[0] && time<normalInterval[1]){
-			result = Evaluation.NORMAL;
+			return Evaluation.NORMAL;
 		}
 		if(time>goodInterval[0] && time<goodInterval[1]){
-			result = Evaluation.GOOD;
+			return Evaluation.GOOD;
 		}
 		if(time>excellentInterval){
-			result = Evaluation.VERY_GOOD;
+			return Evaluation.VERY_GOOD;
 		}
+		return Evaluation.INCONCLUSIVE;
+	}
+	
+	String weeklyWalkerEvaluator () throws IOException{
+		FileManager analyseFile = new FileManager(analyseFileName);
+		String[] data = analyseFile.OpenFile();
+		double weekDistance =0;
+		
+		if(data.length>=DAYS_OF_WEEK){
+			for (int i=1; i<DAYS_OF_WEEK; i++){ //we start at 1 because we are going backwards in the arrays
+				weekDistance += Double.parseDouble(data[data.length-i]);
+			}
+		}
+		else{
+			return Evaluation.INCONCLUSIVE;
+		}
+		
+		if(weekDistance<DEFAULT_MINIMUM_DISTANCE_WEEK)
+			return Evaluation.BAD;
+		if(weekDistance>=DEFAULT_MINIMUM_DISTANCE_WEEK && weekDistance<DEFAULT_MINIMUM_DISTANCE_WEEK*1.5)
+			return Evaluation.NORMAL;
+		if(weekDistance>DEFAULT_MINIMUM_DISTANCE_WEEK*1.5 && weekDistance<DEFAULT_MINIMUM_DISTANCE_WEEK*2)
+			return Evaluation.GOOD;
+		if(weekDistance>DEFAULT_MINIMUM_DISTANCE_WEEK*2)
+			return Evaluation.VERY_GOOD;
+		return Evaluation.INCONCLUSIVE;
 	}
 
 	
