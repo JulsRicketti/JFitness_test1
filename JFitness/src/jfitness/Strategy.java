@@ -4,9 +4,11 @@ import java.io.IOException;
 
 public interface Strategy {
 	
-	void analyse() throws IOException;
-	double recommend() throws IOException;
-	void report() throws IOException;
+	void receiveResults() throws IOException;
+	
+	abstract void analyse() throws IOException;
+	abstract double recommend() throws IOException;
+	abstract void report() throws IOException;
 	
 
 }

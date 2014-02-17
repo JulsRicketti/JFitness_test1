@@ -99,6 +99,12 @@ public class Runner implements Strategy {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void receiveResults() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

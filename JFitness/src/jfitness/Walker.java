@@ -31,20 +31,6 @@ public class Walker implements Strategy{
 	
 	String message = " "; //variable to send messages to the user
 		
-	void walkerEvaluator(int time){
-		if (time<badInterval){
-			result = Evaluation.BAD;
-		}
-		if(time>normalInterval[0] && time<normalInterval[1]){
-			result = Evaluation.NORMAL;
-		}
-		if(time>goodInterval[0] && time<goodInterval[1]){
-			result = Evaluation.GOOD;
-		}
-		if(time>excellentInterval){
-			result = Evaluation.VERY_GOOD;
-		}
-	}
 	
 	public double recommend() throws IOException{
 		FileManager file = new FileManager(recommendFileName, true);
@@ -69,7 +55,7 @@ public class Walker implements Strategy{
 		
 	}
 	
-	public void registerWalk(User user, int time) throws IOException{
+	public void receiveResults(User user, int time) throws IOException{
 		FileManager analyseFile = new FileManager(analyseFileName, true);
 		analyseFile.writeToFile(Integer.toString(time));
 		analyse(user, time);
@@ -138,6 +124,28 @@ public class Walker implements Strategy{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void receiveResults() {
+		// TODO Auto-generated method stub
+		
+	}
 	
+	//when the person wants a daily mode to evaluate their walk
+	void dailyWalkerEvaluator(int time){
+		if (time<badInterval){
+			result = Evaluation.BAD;
+		}
+		if(time>normalInterval[0] && time<normalInterval[1]){
+			result = Evaluation.NORMAL;
+		}
+		if(time>goodInterval[0] && time<goodInterval[1]){
+			result = Evaluation.GOOD;
+		}
+		if(time>excellentInterval){
+			result = Evaluation.VERY_GOOD;
+		}
+	}
+
 	
 }

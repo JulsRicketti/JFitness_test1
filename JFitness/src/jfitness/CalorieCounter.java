@@ -10,6 +10,7 @@ public class CalorieCounter implements Strategy {
 	double calories;
 	final int DAYS_OF_WEEK = 7;
 	final int DEFAULT_MINIMUM_CALORIE_WEEK= 2800;
+	final int DEFAULT_MINIMUM_CALORIE_DAY = 400;
 	
 	int calculateAverageVelocity(int distance, int time){
 		return (distance/time);
@@ -84,4 +85,7 @@ public class CalorieCounter implements Strategy {
 		
 	}
 	
+	public void receiveResults(){
+		
+	}
 }
